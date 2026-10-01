@@ -1,0 +1,39 @@
+<section class="relative h-[60vh] min-h-[500px] overflow-hidden">
+  <img [src]="article.image" [alt]="article.title" class="absolute inset-0 w-full h-full object-cover" />
+  <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent"></div>
+  <div class="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/30 to-transparent"></div>
+
+  <div class="absolute top-8 right-8 left-8">
+    <nav aria-label="مسار التنقل" class="inline-flex items-center gap-2 px-4 py-2 bg-black/30 backdrop-blur-md rounded-full text-sm border border-white/10">
+      <a routerLink="/" aria-label="الرئيسية" class="text-white/70 hover:text-white transition-colors"><i class="fa-solid fa-house" aria-hidden="true"></i></a>
+      <i class="fa-solid fa-chevron-left text-white/30 text-xs" aria-hidden="true"></i>
+      <a routerLink="/blog" class="text-white/70 hover:text-white transition-colors">المدونة</a>
+      <i class="fa-solid fa-chevron-left text-white/30 text-xs" aria-hidden="true"></i>
+      <span class="text-orange-400 font-medium truncate max-w-[200px]">{{ article.category }}</span>
+    </nav>
+  </div>
+
+  <div class="absolute bottom-0 left-0 right-0 p-8 md:p-12">
+    <div class="max-w-5xl mx-auto">
+      <div class="flex flex-wrap items-center gap-3 mb-6">
+        <a [routerLink]="['/blog']" [queryParams]="{ category: article.category }">
+          <app-category-badge [label]="article.category" variant="solid" />
+        </a>
+        <div class="flex items-center gap-4 text-white/70 text-sm">
+          <span class="flex items-center gap-2"><i class="fa-regular fa-calendar" aria-hidden="true"></i>{{ formatDate(article.date) }}</span>
+          <span class="flex items-center gap-2"><i class="fa-regular fa-clock" aria-hidden="true"></i>{{ article.readTime }}</span>
+        </div>
+      </div>
+
+      <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight max-w-4xl">{{ article.title }}</h1>
+
+      <div class="flex items-center gap-4 p-4 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 w-fit">
+        <img [src]="article.author.avatar" [alt]="article.author.name" class="w-14 h-14 rounded-full object-cover ring-2 ring-orange-500/50" />
+        <div>
+          <p class="font-bold text-white">{{ article.author.name }}</p>
+          <p class="text-sm text-white/60">{{ article.author.role }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

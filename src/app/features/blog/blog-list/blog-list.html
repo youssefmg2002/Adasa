@@ -1,0 +1,19 @@
+<app-blog-list-hero></app-blog-list-hero>
+<app-blog-list-filters
+  [allCategoriesLabel]="allCategoriesLabel"
+  [categoryNames]="categoryNames"
+  [selectedCategory]="selectedCategory"
+  [searchTerm]="searchTerm"
+  (categoryChange)="onSelectCategory($event)"
+  (searchChange)="onSearchInputValue($event)"
+></app-blog-list-filters>
+<app-blog-list-results
+  [filteredArticles]="filteredArticles"
+  [paginatedArticles]="paginatedArticles"
+  [pageNumbers]="pageNumbers"
+  [totalPages]="totalPages"
+  [currentPage]="currentPage"
+  [viewMode]="viewMode"
+  (pageChange)="goToPage($event)"
+  (viewModeChange)="setViewMode($event)"
+></app-blog-list-results>

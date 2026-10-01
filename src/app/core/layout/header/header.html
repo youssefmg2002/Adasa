@@ -1,0 +1,113 @@
+<nav
+  class="fixed top-0 right-0 left-0 z-50 border-b border-[#262626] bg-[#0a0a0a]/95 backdrop-blur-xl transition-all duration-500"
+>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-20 items-center justify-between">
+      <!-- اللوجو -->
+      <a routerLink="/" class="group flex items-center gap-3">
+        <div
+          class="relative h-12 w-12 overflow-hidden rounded-xl transition-all duration-300 group-hover:scale-105"
+        >
+          <img src="/logo-GdqARQRt.png" alt="Photography Logo" class="h-full w-full object-cover" />
+        </div>
+        <div class="flex flex-col">
+          <span
+            class="bg-linear-to-r from-white to-neutral-300 bg-clip-text text-xl font-bold text-transparent"
+            >عدسة</span
+          >
+          <span class="hidden text-xs tracking-wide text-orange-400/80 sm:block"
+            >عالم التصوير الفوتوغرافي</span
+          >
+        </div>
+      </a>
+
+      <!-- روابط سطح المكتب -->
+      <div class="hidden items-center md:flex">
+        <div class="flex items-center rounded-full border border-[#262626] bg-[#161616] p-1.5">
+          <a
+            routerLink="/"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLinkActive="bg-linear-to-r from-orange-500 to-orange-600 text-white"
+            class="rounded-full px-5 py-2.5 text-sm font-medium text-neutral-400 transition-all duration-300"
+            >الرئيسية</a
+          >
+          <a
+            routerLink="/blog"
+            routerLinkActive="bg-linear-to-r from-orange-500 to-orange-600 text-white"
+            class="rounded-full px-5 py-2.5 text-sm font-medium text-neutral-400 transition-all duration-300 hover:text-white"
+            >المدونة</a
+          >
+          <a
+            routerLink="/about"
+            routerLinkActive="bg-linear-to-r from-orange-500 to-orange-600 text-white"
+            class="rounded-full px-5 py-2.5 text-sm font-medium text-neutral-400 transition-all duration-300 hover:text-white"
+            >من نحن</a
+          >
+        </div>
+      </div>
+
+      <!-- بحث + ابدأ القراءة (سطح المكتب) -->
+      <div class="hidden items-center gap-3 md:flex">
+        <a
+          routerLink="/blog"
+          title="الانتقال إلى البحث في المقالات"
+          class="rounded-xl border border-transparent p-3 text-neutral-500 transition-all duration-300 hover:border-[#262626] hover:bg-[#161616] hover:text-orange-500"
+          aria-label="البحث في المقالات"
+        >
+          <i class="h-5 w-5 fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        </a>
+        <a routerLink="/blog" class="btn-primary text-sm">ابدأ القراءة</a>
+      </div>
+
+      <!-- زرار الموبايل -->
+      <button
+        type="button"
+        class="rounded-xl border border-transparent p-3 text-neutral-400 transition-all duration-300 hover:border-[#262626] hover:bg-[#161616] hover:text-white md:hidden"
+        (click)="toggleMobileMenu()"
+        aria-label="فتح القائمة"
+      >
+        <i class="h-6 w-6 fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <!-- قائمة الموبايل -->
+    <div
+      class="overflow-hidden transition-all duration-300 md:hidden"
+      [class.max-h-0]="!mobileMenuOpen"
+      [class.max-h-[400px]]="mobileMenuOpen"
+    >
+      <div class="mb-4 rounded-2xl border border-[#262626] bg-[#161616] p-4 backdrop-blur-xl">
+        <div class="flex flex-col space-y-1">
+          <a
+            routerLink="/"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLinkActive="bg-orange-500/10 text-orange-500 border border-orange-500/30"
+            (click)="closeMobileMenu()"
+            class="rounded-xl px-4 py-3 text-sm font-medium text-neutral-400 transition-all duration-300 hover:bg-[#1a1a1a] hover:text-white"
+            >الرئيسية</a
+          >
+          <a
+            routerLink="/blog"
+            routerLinkActive="bg-orange-500/10 text-orange-500 border border-orange-500/30"
+            (click)="closeMobileMenu()"
+            class="rounded-xl px-4 py-3 text-sm font-medium text-neutral-400 transition-all duration-300 hover:bg-[#1a1a1a] hover:text-white"
+            >المدونة</a
+          >
+          <a
+            routerLink="/about"
+            routerLinkActive="bg-orange-500/10 text-orange-500 border border-orange-500/30"
+            (click)="closeMobileMenu()"
+            class="rounded-xl px-4 py-3 text-sm font-medium text-neutral-400 transition-all duration-300 hover:bg-[#1a1a1a] hover:text-white"
+            >من نحن</a
+          >
+          <a
+            routerLink="/blog"
+            (click)="closeMobileMenu()"
+            class="btn-primary mt-2 text-center text-sm"
+            >ابدأ القراءة</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

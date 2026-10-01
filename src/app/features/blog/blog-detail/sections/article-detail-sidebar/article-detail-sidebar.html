@@ -1,0 +1,46 @@
+<aside>
+  <div class="space-y-6">
+    <section class="p-6 bg-[#111111] rounded-2xl border border-[#262626]" aria-labelledby="article-toc-title">
+      <div class="flex items-center gap-3 mb-5">
+        <div class="w-10 h-10 bg-orange-500/10 rounded-xl flex items-center justify-center border border-orange-500/30">
+          <i class="fa-solid fa-list text-orange-500" aria-hidden="true"></i>
+        </div>
+        <h2 id="article-toc-title" class="font-bold text-white">محتويات المقال</h2>
+      </div>
+      <nav aria-label="محتويات المقال" class="space-y-2">
+        @for (item of tocItems; track item.id) {
+          <a [routerLink]="[]" [fragment]="item.id" class="flex items-center gap-3 p-3 rounded-xl text-neutral-400 hover:text-orange-500 hover:bg-orange-500/5 transition-all duration-300 group">
+            <span class="flex items-center justify-center w-6 h-6 bg-[#1a1a1a] rounded-lg text-xs font-bold text-neutral-500 group-hover:bg-orange-500/10 group-hover:text-orange-500 transition-colors">{{ item.index }}</span>
+            <span class="text-sm">{{ item.title }}</span>
+          </a>
+        }
+      </nav>
+    </section>
+
+    <section class="p-6 bg-[#111111] rounded-2xl border border-[#262626]" aria-label="بيانات المقال">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="text-center p-4 bg-[#0a0a0a] rounded-xl">
+          <i class="fa-regular fa-clock text-orange-500 text-xl mb-2" aria-hidden="true"></i>
+          <p class="text-white font-bold">{{ article.readTime }}</p>
+          <p class="text-neutral-500 text-xs">وقت القراءة</p>
+        </div>
+        <div class="text-center p-4 bg-[#0a0a0a] rounded-xl">
+          <i class="fa-regular fa-calendar text-orange-500 text-xl mb-2" aria-hidden="true"></i>
+          <p class="text-white font-bold text-sm">{{ formatDayMonth(article.date) }}</p>
+          <p class="text-neutral-500 text-xs">تاريخ النشر</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="p-6 bg-gradient-to-br from-orange-500/10 to-yellow-500/5 rounded-2xl border border-orange-500/20" aria-labelledby="more-articles-title">
+      <div class="text-center">
+        <div class="w-14 h-14 bg-orange-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <i class="fa-solid fa-envelope text-orange-500 text-xl" aria-hidden="true"></i>
+        </div>
+        <h2 id="more-articles-title" class="font-bold text-white mb-2">لا تفوّت جديدنا</h2>
+        <p class="text-neutral-400 text-sm mb-4">اشترك للحصول على أحدث المقالات</p>
+        <a routerLink="/blog" class="block w-full py-3 bg-orange-500 text-white font-semibold rounded-xl hover:bg-orange-600 transition-colors text-center">تصفح المزيد</a>
+      </div>
+    </section>
+  </div>
+</aside>

@@ -1,0 +1,12 @@
+@if (article; as currentArticle) {
+  <article class="bg-[#0a0a0a] min-h-screen">
+    <app-article-detail-hero [article]="currentArticle" />
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid lg:grid-cols-[1fr_300px] gap-12">
+        <app-article-detail-content class="order-2 lg:order-1" [article]="currentArticle" [parsed]="parsed" />
+        <app-article-detail-sidebar class="order-1 self-start lg:sticky lg:top-24 lg:order-2" [article]="currentArticle" [tocItems]="tocItems" />
+      </div>
+      <app-related-articles [articles]="relatedArticles" />
+    </div>
+  </article>
+}

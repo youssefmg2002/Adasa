@@ -1,0 +1,97 @@
+<section #results class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 scroll-mt-36.5">
+  <div class="mb-8 flex items-center justify-between">
+    <p class="text-neutral-400">
+      عرض <span class="font-bold text-white">{{ filteredArticles.length }}</span> مقالات
+    </p>
+
+    <div class="flex items-center bg-[#161616] border border-[#262626] rounded-xl p-1">
+      <button
+        type="button"
+        title="عرض شبكي"
+        aria-label="عرض شبكي"
+        class="p-2 rounded-lg transition-all duration-300"
+        [class.bg-orange-500]="viewMode === 'grid'"
+        [class.text-white]="viewMode === 'grid'"
+        [class.text-neutral-400]="viewMode !== 'grid'"
+        (click)="viewModeChange.emit('grid')"
+      >
+        <i class="fa-solid fa-table-cells-large" aria-hidden="true"></i>
+      </button>
+      <button
+        type="button"
+        title="عرض قائمة"
+        aria-label="عرض قائمة"
+        class="p-2 rounded-lg transition-all duration-300"
+        [class.bg-orange-500]="viewMode === 'list'"
+        [class.text-white]="viewMode === 'list'"
+        [class.text-neutral-400]="viewMode !== 'list'"
+        (click)="viewModeChange.emit('list')"
+      >
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+
+  @if (filteredArticles.length === 0) {
+    <div class="text-center py-20">
+      <i class="fa-solid fa-magnifying-glass text-4xl text-neutral-600 mb-4" aria-hidden="true"></i>
+      <p class="text-neutral-400">لا توجد مقالات مطابقة لبحثك.</p>
+    </div>
+  } @else {
+    @if (viewMode === 'grid') {
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        @for (article of paginatedArticles; track article.slug; let i = $index) {
+          <app-article-card-grid [article]="article" [animationDelay]="i * 100" />
+        }
+      </div>
+    }
+
+    @if (viewMode === 'list') {
+      <div class="flex flex-col gap-6">
+        @for (article of paginatedArticles; track article.slug; let i = $index) {
+          <app-article-card-list [article]="article" [animationDelay]="i * 100" />
+        }
+      </div>
+    }
+
+    @if (totalPages > 1) {
+      <div class="flex justify-center items-center gap-2 mt-12">
+        <button
+          type="button"
+          aria-label="الصفحة السابقة"
+          class="p-3 rounded-xl border bg-[#161616] border-[#262626] text-white hover:border-orange-500/50 hover:bg-[#1a1a1a] transition-all duration-300 disabled:bg-[#0a0a0a] disabled:text-neutral-600 disabled:cursor-not-allowed disabled:hover:border-[#262626] disabled:hover:bg-[#0a0a0a]"
+          [disabled]="currentPage === 1"
+          (click)="goToPage(currentPage - 1, results)"
+        >
+          <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </button>
+
+        <div class="flex items-center gap-1">
+          @for (page of pageNumbers; track page) {
+            <button
+              type="button"
+              [class]="page === currentPage ? activePageClass : inactivePageClass"
+              (click)="goToPage(page, results)"
+            >
+              {{ page }}
+            </button>
+          }
+        </div>
+
+        <button
+          type="button"
+          aria-label="الصفحة التالية"
+          class="p-3 rounded-xl border bg-[#161616] border-[#262626] text-white hover:border-orange-500/50 hover:bg-[#1a1a1a] transition-all duration-300 disabled:bg-[#0a0a0a] disabled:text-neutral-600 disabled:cursor-not-allowed disabled:hover:border-[#262626] disabled:hover:bg-[#0a0a0a]"
+          [disabled]="currentPage === totalPages"
+          (click)="goToPage(currentPage + 1, results)"
+        >
+          <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <p class="text-center text-neutral-500 mt-4 text-sm">
+        صفحة {{ currentPage }} من {{ totalPages }}
+      </p>
+    }
+  }
+</section>
